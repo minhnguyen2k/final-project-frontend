@@ -4,50 +4,57 @@ import { Box, Typography, Chip, Button } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperComponent from '../common/Swiper/SwiperComponent';
+import { IComicInfo } from '../../../models/comic';
+import { IAuthorInfo } from '../../../models/author';
 interface Props {
-  comic: any;
+  comic: IComicInfo;
 }
 
 const PreviewDesc: FC<Props> = ({ comic }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Box height="60px" mt={1}>
-        <Typography variant="h4">{comic && comic.title}</Typography>
+      <Box height="100px">
+        <Typography className={classes.title} variant="h4">
+          {comic?.name}
+        </Typography>
       </Box>
       <Box display="flex" alignItems="center">
-        <Typography sx={{ marginRight: '10px' }}>Tác giả:</Typography>
-        <Swiper id="swiper" slidesPerView="auto" spaceBetween={8} className={classes.tagWrapper}>
-          <SwiperSlide>
-            <Chip
-              sx={{
-                bgcolor: '#ff8a80',
-                '&:hover': {
-                  backgroundColor: '#ef9a9a',
-                },
-              }}
-              label={comic && comic.detail.author}
-              component="a"
-              href="#basic-chip"
-              clickable
-            />
-          </SwiperSlide>
+        <Typography mr="10px">Tác giả:</Typography>
+        <Swiper id="swiper" className={classes.swiper} slidesPerView="auto" spaceBetween={8}>
+          {comic?.Authors?.map((author: IAuthorInfo) => (
+            <SwiperSlide key={author.id}>
+              <Chip
+                sx={{
+                  bgcolor: '#ff8a80',
+                  '&:hover': {
+                    backgroundColor: '#ef9a9a',
+                  },
+                }}
+                label={author.name}
+                component="a"
+                href="#basic-chip"
+                clickable
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Box>
-      <Box display="flex" mt={2}>
-        <Typography sx={{ marginRight: '5px' }}>Lượt xem</Typography>
+      <Box display="flex" mt={1}>
+        <Typography mr={1}>Lượt xem</Typography>
         <VisibilityIcon />
         {':'}
-        <Typography sx={{ marginLeft: '10px' }}>48</Typography>
+        <Typography ml="10px">{comic?.viewCount}</Typography>
       </Box>
       <Box display="flex" mt={2}>
-        <Typography sx={{ marginRight: '5px' }}>Lượt vote</Typography>
+        <Typography mr={1}>Lượt thích</Typography>
         <FavoriteIcon />
         {':'}
-        <Typography sx={{ marginLeft: '10px' }}>48</Typography>
+        <Typography ml="10px">{comic?.voteCount}</Typography>
       </Box>
       <Button size="small" className={classes.readingButton} variant="contained" disableElevation>
-        Read Now
+        Đọc ngay
       </Button>
     </div>
   );
@@ -66,17 +73,27 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
-  tagWrapper: {
-    width: '100%',
-    flex: 1,
+  title: {
+    maxWidth: '100%',
+    maxHeight: '72px',
+    wordBreak: 'break-word',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3',
+    'line-clamp': '3',
+    '-webkit-box-orient': 'vertical',
   },
   readingButton: {
     marginTop: '16px',
     backgroundColor: '#ff8a80',
     color: 'black',
-    fontSize: '16px',
+    fontSize: '18px',
     '&:hover': {
       backgroundColor: '#ef9a9a',
     },
+  },
+  swiper: {
+    flex: 1,
   },
 }));

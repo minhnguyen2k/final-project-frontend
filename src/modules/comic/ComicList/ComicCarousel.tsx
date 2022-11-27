@@ -4,13 +4,15 @@ import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ComicCard from './ComicCard';
 import 'swiper/css';
+import { ChapTotal, IComicInfo } from '../../../models/comic';
 interface Props {
-  data: any;
+  data: IComicInfo[];
   title: string;
+  chapTotal?: ChapTotal[];
   sortType: string;
 }
 
-const ComicCarousel: FC<Props> = ({ data, title, sortType }) => {
+const ComicCarousel: FC<Props> = ({ data, title, sortType, chapTotal }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -18,12 +20,11 @@ const ComicCarousel: FC<Props> = ({ data, title, sortType }) => {
         <Typography variant="h4">{title}</Typography>
       </div>
       <Swiper id="swiper" slidesPerView={sortType !== 'vote' ? 7 : 4} className={classes.swiper} spaceBetween={24}>
-        {data &&
-          data.map((item: any) => (
-            <SwiperSlide key={item.title} style={{ width: sortType !== 'vote' ? '152px' : '260px' }}>
-              <ComicCard comic={item} sortType={sortType} />
-            </SwiperSlide>
-          ))}
+        {data.map((item: IComicInfo) => (
+          <SwiperSlide key={item.id} style={{ width: sortType !== 'vote' ? '152px' : '260px' }}>
+            <ComicCard chapTotal={chapTotal} comic={item} sortType={sortType} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

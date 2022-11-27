@@ -10,9 +10,10 @@ import { NavigationOptions } from 'swiper/types';
 import 'swiper/css';
 import './style.scss';
 import PreviewDesc from './PreviewDesc';
+import { IComicInfo } from '../../../models/comic';
 
 interface Props {
-  comicList: any;
+  comicList: IComicInfo[];
 }
 
 SwiperCore.use([Navigation, Autoplay, Controller]);
@@ -27,10 +28,10 @@ const ComicSwiper: FC<Props> = ({ comicList }) => {
     controlledSwiper?.slideTo(index);
     setActiveIndex(index);
   };
-  const getComicPreviewImage = (comic: any) => {
-    return comic && comic.image;
+  const getComicPreviewImage = (comic: IComicInfo) => {
+    return comic?.image;
   };
-  const backgroundImageUrl = getComicPreviewImage(comicList && comicList[activeIndex]);
+  const backgroundImageUrl = getComicPreviewImage(comicList[activeIndex]);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -42,7 +43,7 @@ const ComicSwiper: FC<Props> = ({ comicList }) => {
         className={classes.bgImage}
       />
       <div className={classes.bannerWrapper}>
-        <PreviewDesc comic={comicList && comicList[activeIndex]} />
+        <PreviewDesc comic={comicList[activeIndex]} />
         <div className={classes.swiperWrap}>
           <Swiper
             className={classes.swiper}
@@ -64,7 +65,7 @@ const ComicSwiper: FC<Props> = ({ comicList }) => {
             <Fab
               size="small"
               className={cn(classes.navNext, classes.nav, {
-                [classes.hidden]: comicList && activeIndex === comicList.length - 1,
+                [classes.hidden]: activeIndex === comicList.length - 1,
               })}
               ref={navigationNextRef}
               color="secondary"
@@ -81,16 +82,28 @@ const ComicSwiper: FC<Props> = ({ comicList }) => {
             >
               <ChevronLeft fontSize="medium" />
             </Fab>
-            {comicList &&
-              comicList.map((comic: any, index: number) => (
-                <SwiperSlide onClick={() => changeSlide(index)} style={{ width: '136px' }} key={comic.title}>
-                  <img
-                    className={cn(classes.imageCard, { [classes.activeSlide]: index == activeIndex })}
-                    src={comic.image}
-                    alt={comic.title}
+            {comicList.map((comic: IComicInfo, index: number) => (
+              <SwiperSlide onClick={() => changeSlide(index)} style={{ width: '136px' }} key={comic.id}>
+                <img
+                  className={cn(classes.imageCard, { [classes.activeSlide]: index == activeIndex })}
+                  src={comic.image}
+                  alt={comic.name}
+                />
+              </SwiperSlide>
+            ))}
+            <div className={classes.pagination}>
+              {comicList.map((comic: IComicInfo, index: number) => {
+                return (
+                  <span
+                    key={comic.id}
+                    onClick={() => changeSlide(index)}
+                    className={cn(classes.paginationBullet, {
+                      [classes.paginationActive]: index === activeIndex,
+                    })}
                   />
-                </SwiperSlide>
-              ))}
+                );
+              })}
+            </div>
           </Swiper>
         </div>
       </div>
@@ -106,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     paddingTop: '128px ',
-    paddingBottom: '128px',
+    paddingBottom: '68px',
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
@@ -187,5 +200,25 @@ const useStyles = makeStyles((theme) => ({
   },
   hidden: {
     display: 'none',
+  },
+  pagination: {
+    marginInline: 'auto',
+    marginTop: '14px',
+  },
+  paginationBullet: {
+    width: '8px',
+    height: '8px',
+    display: 'inline-block',
+    borderRadius: '50%',
+    backgroundColor: theme.palette.grey[800],
+    marginRight: '12px',
+    [theme.breakpoints.down('sm')]: {
+      marginRight: '8px',
+    },
+    cursor: 'pointer',
+  },
+  paginationActive: {
+    background: '#fb8c00 ',
+    opacity: '1',
   },
 }));

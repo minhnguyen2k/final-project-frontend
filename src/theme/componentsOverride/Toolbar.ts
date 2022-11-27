@@ -1,8 +1,6 @@
 import { Components, Theme } from '@mui/material';
 
-export const Toolbar = (
-  theme: Theme,
-): Components<Omit<Theme, 'components'>> => {
+export const Toolbar = (theme: Theme): Components<Omit<Theme, 'components'>> => {
   return {
     MuiToolbar: {
       styleOverrides: {

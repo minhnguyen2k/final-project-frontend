@@ -105,7 +105,7 @@ export default Navbar;
 const useStyles = makeStyles((theme) => ({
   navbarContainer: {
     width: '1200px',
-    margin: '0 auto',
+
     padding: 0,
     [theme.breakpoints.up('sm')]: {
       padding: 0,

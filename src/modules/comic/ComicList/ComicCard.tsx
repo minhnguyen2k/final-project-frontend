@@ -1,32 +1,57 @@
-import React, { FC } from 'react';
-import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
+import React, { FC, useMemo } from 'react';
+import { Card, CardActionArea, CardMedia, CardContent, Typography, Zoom } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Link, useNavigate } from 'react-router-dom';
+import { generateComicDetailLink } from '../../../utils/generalHelpers';
+import { ChapTotal, IComicInfo } from '../../../models/comic';
 
 interface Props {
-  comic: any;
+  comic: IComicInfo;
   sortType: string;
+  width?: string;
+  height?: string;
+  chapTotal?: ChapTotal[];
 }
 
-const ComicCard: FC<Props> = ({ comic, sortType }) => {
+const ComicCard: FC<Props> = ({ comic, sortType, width, height, chapTotal }) => {
   const classes = useStyles();
+  const history = useNavigate();
+  const comicDetailLink = useMemo(() => {
+    return generateComicDetailLink(comic.id!);
+  }, [comic.id]);
+  const totalChap = useMemo(() => {
+    const item = chapTotal?.find((elm) => elm.id === comic.id);
+    return item?.chapTotal ?? undefined;
+  }, [chapTotal, comic.id]);
+
   return (
-    <>
-      <Card elevation={0} className={classes.card}>
-        <CardActionArea>
+    <Card elevation={0} sx={{ width: width || 'auto' }} className={classes.card}>
+      <CardActionArea onClick={() => history(comicDetailLink)}>
+        <div style={{ overflow: 'hidden' }}>
           <CardMedia
-            style={{ height: sortType !== 'vote' ? 220 : 180, borderRadius: '12px' }}
+            sx={{
+              height: sortType !== 'vote' ? height || 220 : 180,
+              borderRadius: '12px',
+              transition: 'transform .3s ease;  ',
+              '&:hover': { transform: 'scale(1.1)' },
+            }}
             component="img"
             image={comic.image}
-            title={comic.title}
+            title={comic.name}
           />
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.textWrapper} variant="h6">
-              {comic.title}
+        </div>
+        <CardContent className={classes.cardContent}>
+          {chapTotal && (
+            <Typography className={classes.textWrapper} variant="subtitle2">
+              {totalChap} Chương
             </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </>
+          )}
+          <Typography className={classes.textWrapper} variant="h6">
+            {comic.name}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 

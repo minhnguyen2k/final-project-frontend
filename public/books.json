@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "link": "https://www.nettruyenme.com/truyen-tranh/1-nen-5-kumi-ikimono-gakari-119040",
     "image": "//st.ntcdntempv3.com/data/comics/128/1-nen-5-kumi-ikimono-gakari.jpg",
     "title": "1-nen 5-kumi Ikimono Gakari",
@@ -51,6 +52,7 @@
     }
   },
   {
+    "id": 2,
     "link": "https://www.nettruyenme.com/truyen-tranh/3-gatsu-no-lion-40510",
     "image": "//st.ntcdntempv3.com/data/comics/211/3-gatsu-no-lion.jpg",
     "title": "3 Gatsu no Lion",
@@ -190,6 +192,7 @@
     }
   },
   {
+    "id": 3,
     "link": "https://www.nettruyenme.com/truyen-tranh/3-street-of-mysteries-112140",
     "image": "//st.ntcdntempv3.com/data/comics/206/3-street-of-mysteries.jpg",
     "title": "3 Street Of Mysteries",
@@ -289,6 +292,7 @@
     }
   },
   {
+    "id": 4,
     "link": "https://www.nettruyenme.com/truyen-tranh/3x3-eyes-13580",
     "image": "//st.ntcdntempv3.com/data/comics/78/3x3-eyes.jpg",
     "title": "3x3 Eyes",
@@ -924,6 +928,7 @@
     }
   },
   {
+    "id": 5,
     "link": "https://www.nettruyenme.com/truyen-tranh/5-anh-em-sinh-doi-83950",
     "image": "//st.ntcdntempv3.com/data/comics/203/5-anh-em-sinh-doi.jpg",
     "title": "5 anh em sinh đôi",
@@ -959,6 +964,7 @@
     }
   },
   {
+    "id": 6,
     "link": "https://www.nettruyenme.com/truyen-tranh/6-chang-trai-va-1-co-gai-36710",
     "image": "//st.ntcdntempv3.com/data/comics/87/6-chang-trai-va-1-co-gai.jpg",
     "title": "6 chàng trai và 1 cô gái",
@@ -1126,6 +1132,7 @@
     }
   },
   {
+    "id": 7,
     "link": "https://www.nettruyenme.com/truyen-tranh/6-weapons-111350",
     "image": "//st.ntcdntempv3.com/data/comics/127/6-weapons.jpg",
     "title": "6 Weapons",
@@ -1153,6 +1160,7 @@
     }
   },
   {
+    "id": 8,
     "link": "https://www.nettruyenme.com/truyen-tranh/007-pha-an-81630",
     "image": "//st.ntcdntempv3.com/data/comics/227/007-pha-an.jpg",
     "title": "007 Phá Án",
@@ -1216,6 +1224,7 @@
     }
   },
   {
+    "id": 9,
     "link": "https://www.nettruyenme.com/truyen-tranh/7-jikan-me-rhapsody-14540",
     "image": "//st.ntcdntempv3.com/data/comics/174/7-jikan-me-rhapsody.jpg",
     "title": "7 Jikan-me Rhapsody",
@@ -1255,6 +1264,7 @@
     }
   },
   {
+    "id": 10,
     "link": "https://www.nettruyenme.com/truyen-tranh/7-sac-cau-vong-82700",
     "image": "//st.ntcdntempv3.com/data/comics/78/7-sac-cau-vong.jpg",
     "title": "7 Sắc Cầu Vồng",

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import PreviewDesc from './PreviewDesc';
 import ComicSwiper from './ComicSwiper';
+import { IComicInfo } from '../../../models/comic';
 
 interface Props {
-  comicList: any;
+  comicList: IComicInfo[];
 }
 
 const ComicBanner: FC<Props> = ({ comicList }) => {
