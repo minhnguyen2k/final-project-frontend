@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import Fab from '@mui/material/Fab';
@@ -18,6 +18,7 @@ interface Props {
 
 SwiperCore.use([Navigation, Autoplay, Controller]);
 const SLIDE_WIDTH = 136;
+const slideSpeed = 4000;
 
 const ComicSwiper: FC<Props> = ({ comicList }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -33,6 +34,23 @@ const ComicSwiper: FC<Props> = ({ comicList }) => {
   };
   const backgroundImageUrl = getComicPreviewImage(comicList[activeIndex]);
   const classes = useStyles();
+  useEffect(() => {
+    if (controlledSwiper) {
+      const autoPlay = setInterval(() => {
+        if (activeIndex === comicList.length - 1) {
+          controlledSwiper.slideTo(0);
+          setActiveIndex(0);
+        } else {
+          controlledSwiper.slideTo(activeIndex + 1);
+          setActiveIndex((prev) => prev + 1);
+        }
+      }, slideSpeed);
+
+      return () => {
+        clearInterval(autoPlay);
+      };
+    }
+  }, [activeIndex, controlledSwiper]);
   return (
     <div className={classes.root}>
       <div

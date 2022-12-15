@@ -1,6 +1,19 @@
 import React, { lazy } from 'react';
-import { useRoutes } from 'react-router-dom';
+import { Route, Routes, useRoutes } from 'react-router-dom';
+import AdminPage from './modules/admin/AdminPage';
+import ComicChapCreate from './modules/admin/comic/pages/ComicChapCreate';
+import ComicChapEdit from './modules/admin/comic/pages/ComicChapEdit';
+import ComicChapImageList from './modules/admin/comic/pages/ComicChapImageList';
+import ComicChapList from './modules/admin/comic/pages/ComicChapList';
+import ComicCreate from './modules/admin/comic/pages/ComicCreate';
+import ComicEdit from './modules/admin/comic/pages/ComicEdit';
+import ComicList from './modules/admin/comic/pages/ComicList';
+import UserEdit from './modules/admin/comic/pages/UserEdit';
+import UserList from './modules/admin/comic/pages/UserList';
 import LoginPage from './modules/auth/pages/LoginPage';
+import SignUpPage from './modules/auth/pages/SignUpPage';
+import ComicFilteredPage from './modules/comic/pages/ComicFilteredPage';
+import ComicResultPage from './modules/comic/pages/ComicResultPage';
 import ReadPage from './modules/comic/pages/ReadPage';
 
 interface Props {}
@@ -28,6 +41,14 @@ const Router = (props: Props) => {
       element: <GenrePage />,
     },
     {
+      path: '/comic/filter',
+      element: <ComicFilteredPage />,
+    },
+    {
+      path: '/comic/search',
+      element: <ComicResultPage />,
+    },
+    {
       path: '/comic/read/:bookName/:chapName/:id',
       element: <ReadPage />,
     },
@@ -38,6 +59,28 @@ const Router = (props: Props) => {
     {
       path: '/login',
       element: <LoginPage />,
+    },
+    {
+      path: '/sign-up',
+      element: <SignUpPage />,
+    },
+    {
+      path: '/admin/*',
+      element: (
+        <AdminPage>
+          <Routes>
+            <Route path="pages/comics/manage-comic" element={<ComicList />} />
+            <Route path="pages/comics/new-comic" element={<ComicCreate />} />
+            <Route path="pages/comics/comic-detail/:id" element={<ComicEdit />} />
+            <Route path="pages/comics/manage-comic-chap" element={<ComicChapList />} />
+            <Route path="pages/comics/new-comic-chap" element={<ComicChapCreate />} />
+            <Route path="pages/comics/comic-chap-detail/:id" element={<ComicChapEdit />} />
+            <Route path="pages/comics/manage-comic-chap-image" element={<ComicChapImageList />} />
+            <Route path="pages/comics/manage-user" element={<UserList />} />
+            <Route path="pages/comics/user-detail/:id" element={<UserEdit />} />
+          </Routes>
+        </AdminPage>
+      ),
     },
   ]);
 

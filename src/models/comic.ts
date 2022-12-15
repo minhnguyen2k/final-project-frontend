@@ -16,3 +16,8 @@ export interface ChapTotal {
   id: string;
   chapTotal: number;
 }
+export interface IFilterComic {
+  genreId: string;
+  chapCount: number;
+  sortBy: string;
+}

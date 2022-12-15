@@ -1,5 +1,5 @@
 export const generateComicDetailLink = (comicId: string) => {
-  return `details/${comicId}`;
+  return `/details/${comicId}`;
 };
 export const generateReadComicLink = (comicName: string, chapName: string, chapId: string) => {
   const bookNameTransform = comicName
@@ -44,4 +44,37 @@ export const sortObj = (dataList: any, property: any, sortWithNumber: boolean = 
         sensitivity: 'base',
       });
   });
+};
+export const isNotNull = <T>(item: T | null): item is T => {
+  return item !== null;
+};
+export const bookNameTransform = (comicName: string) => {
+  return comicName
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .replace(/ - /g, '-')
+    .replace(/ /g, '-');
+};
+export const getShortImageName = (image: string) => {
+  const index = image.lastIndexOf('/');
+  return image.substring(index + 1);
+};
+export const getFolderImageName = (image: string) => {
+  const slashList = image.split('/');
+  return slashList[slashList.length - 2];
+};
+export const getFormatImageName = (image: string) => {
+  const index = image.lastIndexOf('.');
+  return image.substring(index + 1).toUpperCase();
+};
+export const getImageNameExcludeFormat = (image: string) => {
+  const index = image.lastIndexOf('.');
+  return image.slice(0, index);
+};
+export const getLastPage = (image: string) => {
+  const lastDashIndex = image.lastIndexOf('-');
+  const lastDotIndex = image.lastIndexOf('.');
+  return image.slice(lastDashIndex + 1, lastDotIndex);
 };

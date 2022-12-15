@@ -14,6 +14,7 @@ interface Props {
 }
 
 const ComicCard: FC<Props> = ({ comic, sortType, width, height, chapTotal }) => {
+  console.log(comic);
   const classes = useStyles();
   const history = useNavigate();
   const comicDetailLink = useMemo(() => {
@@ -32,6 +33,7 @@ const ComicCard: FC<Props> = ({ comic, sortType, width, height, chapTotal }) => 
             sx={{
               height: sortType !== 'vote' ? height || 220 : 180,
               borderRadius: '12px',
+              border: '6px solid #F8F9FA',
               transition: 'transform .3s ease;  ',
               '&:hover': { transform: 'scale(1.1)' },
             }}
@@ -49,6 +51,11 @@ const ComicCard: FC<Props> = ({ comic, sortType, width, height, chapTotal }) => 
           <Typography className={classes.textWrapper} variant="h6">
             {comic.name}
           </Typography>
+          {sortType === 'newChapter' && (
+            <Typography className={classes.textWrapper} variant="h6">
+              {comic.Chaps?.[0].chapName}
+            </Typography>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>

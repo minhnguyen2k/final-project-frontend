@@ -11,7 +11,7 @@ import ComicLayout from '../../../layout/ComicLayout';
 import { AppState } from '../../../redux/reducer';
 import { useSelector } from 'react-redux';
 import ComicNavbarReader from '../ComicReader/ComicNavbarReader';
-import Loader from '../common/Loader';
+import Loader from '../../../components/Loader';
 
 interface Props {}
 

@@ -15,7 +15,7 @@ import { IComicInfo } from '../../../models/comic';
 import { TotalRelevantBooksChap } from '../../../models/chap';
 import { setComicInfoAction } from '../ComicReader/redux/comicReaderReducer';
 import { AppState } from '../../../redux/reducer';
-import Loader from '../common/Loader';
+import Loader from '../../../components/Loader';
 
 interface Props {}
 

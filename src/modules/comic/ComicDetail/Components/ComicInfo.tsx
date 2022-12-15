@@ -7,11 +7,11 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { shortenString } from '../../../../utils/generalHelpers';
+import { generateReadComicLink, shortenString } from '../../../../utils/generalHelpers';
 import { IComicInfo } from '../../../../models/comic';
 import { IGenreInfo } from '../../../../models/genre';
 import { IAuthorInfo } from '../../../../models/author';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 interface Props {
   comic: IComicInfo;
 }
@@ -20,6 +20,7 @@ const ComicInfo: FC<Props> = ({ comic }) => {
   const [isShowMore, setIsShowMore] = useState(true);
   const classes = useStyles();
   const { id } = useParams();
+  const navigate = useNavigate();
   const chapTotal = useMemo(() => {
     return comic.Chaps?.length;
   }, [comic]);
@@ -50,7 +51,7 @@ const ComicInfo: FC<Props> = ({ comic }) => {
             />
           ))}
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" flexWrap="wrap" lineHeight="50px" alignItems="center">
           <Typography sx={{ marginRight: '5px' }}>Thể loại</Typography>
           <LocalOfferIcon />
           {':'}
@@ -124,7 +125,21 @@ const ComicInfo: FC<Props> = ({ comic }) => {
           </>
         )}
         <Box display="flex" mt={5} width="50%">
-          <Button sx={{ flex: 1, fontSize: '18px', borderRadius: '8px' }} variant="contained">
+          <Button
+            onClick={() => {
+              if (comic && comic.Chaps) {
+                navigate(
+                  generateReadComicLink(
+                    comic.name,
+                    comic.Chaps[comic.Chaps.length - 1].chapName,
+                    comic.Chaps[comic.Chaps.length - 1].id!,
+                  ),
+                );
+              }
+            }}
+            sx={{ flex: 1, fontSize: '18px', borderRadius: '8px' }}
+            variant="contained"
+          >
             Đọc truyện
           </Button>
           <Button

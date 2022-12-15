@@ -75,7 +75,7 @@ const ComicNavbarReader: FC<Props> = ({ comic }) => {
             <IconButton onClick={() => navigate('/')}>
               <HouseIcon className={classes.navigationIcon} />
             </IconButton>
-            <IconButton sx={{ pl: 0 }} onClick={() => navigate(`/${generateComicDetailLink(comic?.id!)}`)}>
+            <IconButton sx={{ pl: 0 }} onClick={() => navigate(`${generateComicDetailLink(comic?.id!)}`)}>
               <ListIcon className={classes.navigationIcon} />
             </IconButton>
             <Button

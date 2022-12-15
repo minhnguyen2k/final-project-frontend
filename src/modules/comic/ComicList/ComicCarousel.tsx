@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '1200px',
-    padding: '16px 12px',
     width: '100%',
     zIndex: 1,
   },

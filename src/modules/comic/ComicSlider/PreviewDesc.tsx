@@ -7,12 +7,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperComponent from '../common/Swiper/SwiperComponent';
 import { IComicInfo } from '../../../models/comic';
 import { IAuthorInfo } from '../../../models/author';
+import { useDispatch } from 'react-redux';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { useNavigate } from 'react-router-dom';
+import { generateReadComicLink, sortObj } from '../../../utils/generalHelpers';
+import { IChapInfo } from '../../../models/chap';
+import { setComicInfoAction } from '../ComicReader/redux/comicReaderReducer';
+import { AppState } from '../../../redux/reducer';
 interface Props {
   comic: IComicInfo;
 }
 
 const PreviewDesc: FC<Props> = ({ comic }) => {
   const classes = useStyles();
+  const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
+  const navigate = useNavigate();
   return (
     <div className={classes.root}>
       <Box height="100px">
@@ -53,7 +63,19 @@ const PreviewDesc: FC<Props> = ({ comic }) => {
         {':'}
         <Typography ml="10px">{comic?.voteCount}</Typography>
       </Box>
-      <Button size="small" className={classes.readingButton} variant="contained" disableElevation>
+      <Button
+        size="small"
+        onClick={() => {
+          if (comic && comic.Chaps) {
+            const comicChapList: IChapInfo[] = sortObj(comic.Chaps, 'chapName', true);
+            dispatch(setComicInfoAction({ ...comic }));
+            navigate(generateReadComicLink(comic.name, comicChapList[0].chapName, comicChapList[0].id!));
+          }
+        }}
+        className={classes.readingButton}
+        variant="contained"
+        disableElevation
+      >
         Đọc ngay
       </Button>
     </div>

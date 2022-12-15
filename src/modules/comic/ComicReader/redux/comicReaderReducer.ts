@@ -6,7 +6,7 @@ export interface ComicReaderState {
   comicInfo?: IComicInfo;
 }
 
-export const setComicInfoAction = createCustomAction('comicReader/setComicInfo', (payload: IComicInfo[]) => {
+export const setComicInfoAction = createCustomAction('comicReader/setComicInfo', (payload: IComicInfo) => {
   return {
     payload,
   };
