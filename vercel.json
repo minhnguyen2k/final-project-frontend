@@ -12,5 +12,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://localhost:3334/api"
+    }
   ]
 }
