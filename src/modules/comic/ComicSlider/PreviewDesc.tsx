@@ -4,7 +4,6 @@ import { Box, Typography, Chip, Button } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperComponent from '../common/Swiper/SwiperComponent';
 import { IComicInfo } from '../../../models/comic';
 import { IAuthorInfo } from '../../../models/author';
 import { useDispatch } from 'react-redux';
