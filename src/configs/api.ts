@@ -1,5 +1,3 @@
-import { APIHost } from '../utils/constants';
-
 // eslint-disable-next-line no-unused-vars
 enum APIService {
   auth,
@@ -10,11 +8,11 @@ enum APIService {
 
 function getBaseUrl(service: APIService) {
   if (service === APIService.auth) {
-    return `${APIHost}/auth`;
+    return `${process.env.BASE_URL}/api/auth`;
   } else if (service === APIService.protected) {
-    return `${APIHost}/protected`;
+    return `${process.env.BASE_URL}/api/protected`;
   } else if (service === APIService.public) {
-    return `${APIHost}`;
+    return `${process.env.BASE_URL}/api`;
   }
 
   return '';
