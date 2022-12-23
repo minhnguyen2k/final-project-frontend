@@ -2,7 +2,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const router = {
-  '/api': 'http://api.freemics.tech/api',
+  '/api': 'http://localhost:3334/api',
 };
 
 // eslint-disable-next-line no-undef
@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://api.freemics.tech/api',
+      target: 'http://localhost:3334/api',
       changeOrigin: true,
       secure: false,
       pathRewrite: {
