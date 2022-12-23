@@ -13,7 +13,6 @@ export function fetchThunk(
 ): ThunkAction<Promise<any>, AppState, null, Action<string>> {
   return async (dispatch, getState) => {
     const res = await fetch(url, {
-      credentials: 'include',
       method,
       body: body instanceof FormData ? body : JSON.stringify(body),
       headers:
