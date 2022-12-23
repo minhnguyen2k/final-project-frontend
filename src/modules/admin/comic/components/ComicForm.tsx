@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Autocomplete, Box, Button, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
+import { Alert, Autocomplete, Box, Button, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
@@ -33,6 +33,7 @@ const ComicForm: FC<Props> = ({ isEditMode, comicInfo, handleCreateComic, handle
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
   const authorList = useSelector((state: AppState) => state.comicAdmin.authorList);
   const genreList = useSelector((state: AppState) => state.comicAdmin.genreList);
+  const [validateImage, setValidateImage] = useState(false);
   const [imgSource, setImgSource] = useState<string>();
   const [file, setFile] = useState<File | null | undefined>();
   const [initialValues, setInitialValues] = useState<IComicInfo>({
@@ -90,9 +91,12 @@ const ComicForm: FC<Props> = ({ isEditMode, comicInfo, handleCreateComic, handle
       setFile(null);
     }
   }, [comicInfo, isEditMode]);
+  useEffect(() => {
+    if (file) setValidateImage(false);
+  }, [file]);
   return (
     <Formik initialValues={initialValues} enableReinitialize validationSchema={schema} onSubmit={onSubmit}>
-      {({ setFieldValue, values, touched, errors, resetForm }) => {
+      {({ setFieldValue, values, touched, errors, resetForm, setFieldTouched }) => {
         return (
           <Form noValidate>
             <Paper elevation={3} className={classes.content}>
@@ -171,6 +175,11 @@ const ComicForm: FC<Props> = ({ isEditMode, comicInfo, handleCreateComic, handle
                           </Button>
                           <input ref={uploadInputRef} type="file" hidden onChange={handleUpload} />
                         </Box>
+                        {validateImage && (
+                          <Box ml={4}>
+                            <Alert severity="error">Image is required</Alert>
+                          </Box>
+                        )}
                       </Box>
                     </Grid>
                     <Grid className={classes.alignRight} item xs={2}>
@@ -196,6 +205,8 @@ const ComicForm: FC<Props> = ({ isEditMode, comicInfo, handleCreateComic, handle
                           <TextField
                             {...params}
                             placeholder={values.Authors!.length === 0 ? 'Type author name to select' : ''}
+                            error={touched.Authors && values.Authors!.length === 0}
+                            helperText={touched.Authors && values.Authors!.length === 0 && 'Authors is required'}
                           />
                         )}
                       />
@@ -216,20 +227,34 @@ const ComicForm: FC<Props> = ({ isEditMode, comicInfo, handleCreateComic, handle
                         isOptionEqualToValue={(option, value) => option.name === value.name}
                         size="small"
                         onChange={(event, newValue) => {
-                          if (newValue !== null) setFieldValue('Genres', newValue);
+                          if (newValue !== null) {
+                            setFieldValue('Genres', newValue);
+                          }
                         }}
                         className={classes.textFieldWrapper}
                         renderInput={(params) => (
                           <TextField
                             {...params}
                             placeholder={values.Genres!.length === 0 ? 'Type genre name to select' : ''}
+                            error={touched.Genres && values.Genres!.length === 0}
+                            helperText={touched.Genres && values.Genres!.length === 0 && 'Genres is required'}
                           />
                         )}
                       />
                     </Grid>
                   </Grid>
                   <div className={classes.buttonsWrapper}>
-                    <Button variant="contained" className={classes.saveButton} type="submit">
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        if (handleCreateComic && !file) {
+                          setValidateImage(true);
+                          return;
+                        }
+                      }}
+                      className={classes.saveButton}
+                      type="submit"
+                    >
                       SAVE
                     </Button>
                     <Button

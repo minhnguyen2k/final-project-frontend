@@ -1,5 +1,6 @@
 import React, { lazy } from 'react';
 import { Route, Routes, useRoutes } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 import AdminPage from './modules/admin/AdminPage';
 import ComicChapCreate from './modules/admin/comic/pages/ComicChapCreate';
 import ComicChapEdit from './modules/admin/comic/pages/ComicChapEdit';
@@ -67,19 +68,21 @@ const Router = (props: Props) => {
     {
       path: '/admin/*',
       element: (
-        <AdminPage>
-          <Routes>
-            <Route path="pages/comics/manage-comic" element={<ComicList />} />
-            <Route path="pages/comics/new-comic" element={<ComicCreate />} />
-            <Route path="pages/comics/comic-detail/:id" element={<ComicEdit />} />
-            <Route path="pages/comics/manage-comic-chap" element={<ComicChapList />} />
-            <Route path="pages/comics/new-comic-chap" element={<ComicChapCreate />} />
-            <Route path="pages/comics/comic-chap-detail/:id" element={<ComicChapEdit />} />
-            <Route path="pages/comics/manage-comic-chap-image" element={<ComicChapImageList />} />
-            <Route path="pages/comics/manage-user" element={<UserList />} />
-            <Route path="pages/comics/user-detail/:id" element={<UserEdit />} />
-          </Routes>
-        </AdminPage>
+        <ProtectedRoute requiredAdminRole>
+          <AdminPage>
+            <Routes>
+              <Route path="pages/comics/manage-comic" element={<ComicList />} />
+              <Route path="pages/comics/new-comic" element={<ComicCreate />} />
+              <Route path="pages/comics/comic-detail/:id" element={<ComicEdit />} />
+              <Route path="pages/comics/manage-comic-chap" element={<ComicChapList />} />
+              <Route path="pages/comics/new-comic-chap" element={<ComicChapCreate />} />
+              <Route path="pages/comics/comic-chap-detail/:id" element={<ComicChapEdit />} />
+              <Route path="pages/comics/manage-comic-chap-image" element={<ComicChapImageList />} />
+              <Route path="pages/comics/manage-user" element={<UserList />} />
+              <Route path="pages/comics/user-detail/:id" element={<UserEdit />} />
+            </Routes>
+          </AdminPage>
+        </ProtectedRoute>
       ),
     },
   ]);

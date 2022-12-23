@@ -20,7 +20,7 @@ const RelationComic: FC<Props> = ({ relationComics, totalRelevantBooksChap }) =>
   );
   return (
     <div className={classes.relateComicWrapper}>
-      <Typography variant="h4">Related Comic</Typography>
+      <Typography variant="h4">Truyện Tương Tự</Typography>
       {relationComics.map((comic: IComicInfo) => {
         return (
           <Link style={{ textDecoration: 'none', color: 'unset' }} to={`/details/${comic.id}`} key={comic.id}>

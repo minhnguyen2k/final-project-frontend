@@ -20,12 +20,12 @@ const SignUpForm: FC<Props> = ({ handleSignUp }) => {
     confirmPassword: '',
   };
   const validationSchema = yup.object({
-    email: yup.string().required().email(),
-    username: yup.string().required(),
-    password: yup.string().required(),
+    email: yup.string().required('Trường này không thể bỏ trống').email('Email phải đúng định dạng'),
+    username: yup.string().required('Trường này không thể bỏ trống'),
+    password: yup.string().required('Trường này không thể bỏ trống'),
     confirmPassword: yup
       .string()
-      .required()
+      .required('Trường này không thể bỏ trống')
       .oneOf([yup.ref('password'), null], 'Mật khẩu không khớp'),
   });
   const onSubmit = (signUpFormData: ISignUpParams) => {

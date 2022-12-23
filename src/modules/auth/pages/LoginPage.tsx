@@ -31,7 +31,7 @@ const LoginPage: FC<Props> = () => {
         data.userInfo.Role.name !== 'admin' ? navigate('/') : navigate('/admin/pages/comics/manage-comic');
       }
       setIsLoading(false);
-      toast.error(data.error, { containerId: 'A' });
+      toast.error(data.error.split(':')[1], { containerId: 'A' });
     },
     [dispatch, navigate],
   );

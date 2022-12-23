@@ -14,7 +14,6 @@ interface Props {
 }
 
 const ComicCard: FC<Props> = ({ comic, sortType, width, height, chapTotal }) => {
-  console.log(comic);
   const classes = useStyles();
   const history = useNavigate();
   const comicDetailLink = useMemo(() => {

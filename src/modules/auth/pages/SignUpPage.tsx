@@ -27,7 +27,7 @@ const SignUpPage: FC<Props> = () => {
         return;
       }
       setIsLoading(false);
-      toast.error(json.error, { containerId: 'A' });
+      toast.error(json.error.split(':')[1], { containerId: 'A' });
     },
     [dispatch],
   );

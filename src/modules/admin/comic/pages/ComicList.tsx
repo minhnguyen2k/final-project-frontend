@@ -30,7 +30,6 @@ const ComicList: FC<Props> = () => {
   const handleCloseDialog = () => {
     setDialogIsOpen(false);
   };
-
   const handleSelectComic = (cell: React.PropsWithChildren<CellProps<any, any>>) => {
     navigate(`/admin/pages/comics/comic-detail/${cell.row.values.id}`);
     dispatch(setSelectedComicChapInfo(null));
@@ -39,6 +38,7 @@ const ComicList: FC<Props> = () => {
   const getAllComic = useCallback(async () => {
     setIsLoading(true);
     const json = await dispatch(fetchThunk(API_PATHS.allBooksWithNotPagination, 'get'));
+    console.log(json);
     dispatch(setComicListInfo([...sortObj(json.data, 'name', true)]));
     setIsLoading(false);
     setIsDeleteDone(false);

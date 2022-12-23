@@ -27,7 +27,16 @@ const ReadPage: FC<Props> = () => {
     setChapImageList([...json.data]);
     setIsLoading(false);
   }, [dispatch, id]);
+  const handleUpdateComicViewCount = useCallback(async () => {
+    if (comic) {
+      const { id, ...data } = comic;
+      await dispatch(
+        fetchThunk(`${API_PATHS.updateBook}/${comic.id}`, 'put', { ...data, viewCount: data.viewCount + 1 }),
+      );
+    }
+  }, [comic, dispatch]);
   useEffect(() => {
+    handleUpdateComicViewCount();
     getAllChapImages();
   }, [getAllChapImages]);
   return (

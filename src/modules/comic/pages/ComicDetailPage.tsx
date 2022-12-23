@@ -36,6 +36,7 @@ const ComicDetailPage: FC<Props> = () => {
     dispatch(setComicInfoAction({ ...json.data.book }));
     setIsLoading(false);
   }, [dispatch, id]);
+
   useEffect(() => {
     getComicById();
   }, [getComicById]);

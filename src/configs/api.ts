@@ -54,4 +54,6 @@ export const API_PATHS = {
   allRoles: `${getBaseUrl(APIService.public)}/roles`,
   updateUser: `${getBaseUrl(APIService.public)}/users/edit`,
   deleteUser: `${getBaseUrl(APIService.public)}/users`,
+  createComment: `${getBaseUrl(APIService.public)}/comments`,
+  getAllCommentByBook: `${getBaseUrl(APIService.public)}/comments`,
 };

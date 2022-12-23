@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Pagination, Stack } from '@mui/material';
 import ComicCard from '../ComicList/ComicCard';
 import { IComicInfo } from '../../../models/comic';
 import { IGenreInfo } from '../../../models/genre';
+import { useSearchParams } from 'react-router-dom';
 interface Props {
   comicList?: IComicInfo[];
   genre?: IGenreInfo;
+  totalPage?: number;
+  handleChangePage(page: number): void;
 }
 
-const GenreDetail: FC<Props> = ({ comicList, genre }) => {
+const GenreDetail: FC<Props> = ({ comicList, genre, handleChangePage, totalPage }) => {
   const classes = useStyles();
+  const [searchParams] = useSearchParams();
   return (
     <div className={classes.genreDetailWrapper}>
       {genre ? (
@@ -52,6 +56,21 @@ const GenreDetail: FC<Props> = ({ comicList, genre }) => {
             })
           : null}
       </Box>
+      <Stack
+        sx={{
+          margin: '15px 0px',
+        }}
+        spacing={2}
+      >
+        <Pagination
+          page={+searchParams.get('page')! || 1}
+          sx={{ display: 'flex', justifyContent: 'center' }}
+          onChange={(e, page) => {
+            handleChangePage(page);
+          }}
+          count={totalPage}
+        />
+      </Stack>
     </div>
   );
 };

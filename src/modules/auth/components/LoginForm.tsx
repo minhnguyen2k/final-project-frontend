@@ -17,8 +17,8 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
     password: '',
   };
   const validationSchema = yup.object({
-    email: yup.string().required().email(),
-    password: yup.string().required(),
+    email: yup.string().required('Trường này không thể bỏ trống').email('Email phải đúng định dạng'),
+    password: yup.string().required('Trường này không thể bỏ trống'),
   });
   const onSubmit = (loginFormData: ILoginParams) => {
     handleLogin(loginFormData);

@@ -101,7 +101,7 @@ const Navbar = (props: Props) => {
           <Box sx={{ flexGrow: 0 }}>
             <TextField
               size="small"
-              placeholder="Search book name"
+              placeholder="Tìm kiếm truyện"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   if (searchFieldComic.trim() === '') {
@@ -172,7 +172,7 @@ const Navbar = (props: Props) => {
               </>
             ) : (
               <Box display="inline-flex" alignItems="center">
-                <Typography color="textPrimary">Hi</Typography>
+                <Typography color="textPrimary">Xin chào</Typography>
                 <Typography ml={1} mr={2} variant="h5" color="textPrimary">
                   {currentUser.username}
                 </Typography>
