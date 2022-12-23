@@ -2,7 +2,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const router = {
-  '/api': 'http://api.freemics.tech',
+  '/api': 'http://api.freemics.tech/api',
 };
 
 // eslint-disable-next-line no-undef
