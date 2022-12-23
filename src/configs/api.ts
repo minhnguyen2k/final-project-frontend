@@ -8,11 +8,12 @@ enum APIService {
 
 function getBaseUrl(service: APIService) {
   if (service === APIService.auth) {
-    return `${process.env.BASE_URL}/api/auth`;
+    return `${process.env.REACT_APP_API_URL}/api/auth`;
   } else if (service === APIService.protected) {
-    return `${process.env.BASE_URL}/api/protected`;
+    return `${process.env.REACT_APP_API_URL}/api/protected`;
   } else if (service === APIService.public) {
-    return `${process.env.BASE_URL}/api`;
+    console.log(process.env.REACT_APP_API_URL);
+    return `${process.env.REACT_APP_API_URL}/api`;
   }
 
   return '';
