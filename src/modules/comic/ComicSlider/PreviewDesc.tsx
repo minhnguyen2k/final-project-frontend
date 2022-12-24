@@ -66,7 +66,7 @@ const PreviewDesc: FC<Props> = ({ comic }) => {
         size="small"
         onClick={() => {
           if (comic && comic.Chaps) {
-            const comicChapList: IChapInfo[] = sortObj(comic.Chaps, 'chapName', true);
+            const comicChapList: IChapInfo[] = sortObj(comic.Chaps, 'chapName', true).reverse();
             dispatch(setComicInfoAction({ ...comic }));
             navigate(generateReadComicLink(comic.name, comicChapList[0].chapName, comicChapList[0].id!));
           }

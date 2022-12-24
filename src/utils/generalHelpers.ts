@@ -8,7 +8,8 @@ export const generateReadComicLink = (comicName: string, chapName: string, chapI
     .replace(/đ/g, 'd')
     .replace(/Đ/g, 'D')
     .replace(/ - /g, '-')
-    .replace(/ /g, '-');
+    .replace(/ /g, '-')
+    .replace('/', '-');
   return `/comic/read/${bookNameTransform}/${chapName.replace(/ /g, '-')}/${chapId}`;
 };
 export const shortenString = (str: string, length: number) => {

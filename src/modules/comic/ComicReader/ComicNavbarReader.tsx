@@ -103,7 +103,7 @@ const ComicNavbarReader: FC<Props> = ({ comic }) => {
                 popupIndicator: classes.popupIndicator,
               }}
               size="small"
-              renderInput={(params) => <TextField {...params} placeholder="Type Vendor name to select" />}
+              renderInput={(params) => <TextField {...params} placeholder="Nhập chương mà bạn muốn đọc" />}
             />
             <Button
               onClick={handleNextChap}
