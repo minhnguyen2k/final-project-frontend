@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/static/css/main.d8fb8f32.css",
-    "main.js": "/static/js/main.82624b8a.js",
+    "main.js": "/static/js/main.43d12c6f.js",
     "static/css/638.b988a9a0.chunk.css": "/static/css/638.b988a9a0.chunk.css",
-    "static/js/638.734aedac.chunk.js": "/static/js/638.734aedac.chunk.js",
+    "static/js/638.a5c189fe.chunk.js": "/static/js/638.a5c189fe.chunk.js",
     "static/js/237.2cf07bff.chunk.js": "/static/js/237.2cf07bff.chunk.js",
     "static/js/733.054853a1.chunk.js": "/static/js/733.054853a1.chunk.js",
     "static/js/787.3aeeec0e.chunk.js": "/static/js/787.3aeeec0e.chunk.js",
@@ -13,9 +13,9 @@
     "static/media/SVN-SofiaPro-Regular.woff2": "/static/media/SVN-SofiaPro-Regular.5b3d1be43dce9b034c9f.woff2",
     "index.html": "/index.html",
     "main.d8fb8f32.css.map": "/static/css/main.d8fb8f32.css.map",
-    "main.82624b8a.js.map": "/static/js/main.82624b8a.js.map",
+    "main.43d12c6f.js.map": "/static/js/main.43d12c6f.js.map",
     "638.b988a9a0.chunk.css.map": "/static/css/638.b988a9a0.chunk.css.map",
-    "638.734aedac.chunk.js.map": "/static/js/638.734aedac.chunk.js.map",
+    "638.a5c189fe.chunk.js.map": "/static/js/638.a5c189fe.chunk.js.map",
     "237.2cf07bff.chunk.js.map": "/static/js/237.2cf07bff.chunk.js.map",
     "733.054853a1.chunk.js.map": "/static/js/733.054853a1.chunk.js.map",
     "787.3aeeec0e.chunk.js.map": "/static/js/787.3aeeec0e.chunk.js.map",
@@ -24,6 +24,6 @@
   },
   "entrypoints": [
     "static/css/main.d8fb8f32.css",
-    "static/js/main.82624b8a.js"
+    "static/js/main.43d12c6f.js"
   ]
 }
