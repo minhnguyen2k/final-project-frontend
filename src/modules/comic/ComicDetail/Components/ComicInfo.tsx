@@ -12,6 +12,7 @@ import { IComicInfo } from '../../../../models/comic';
 import { IGenreInfo } from '../../../../models/genre';
 import { IAuthorInfo } from '../../../../models/author';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 interface Props {
   comic: IComicInfo;
 }
@@ -127,7 +128,7 @@ const ComicInfo: FC<Props> = ({ comic }) => {
         <Box display="flex" mt={5} width="50%">
           <Button
             onClick={() => {
-              if (comic && comic.Chaps) {
+              if (comic && comic.Chaps && comic.Chaps.length > 0) {
                 navigate(
                   generateReadComicLink(
                     comic.name,
@@ -135,6 +136,8 @@ const ComicInfo: FC<Props> = ({ comic }) => {
                     comic.Chaps[comic.Chaps.length - 1].id!,
                   ),
                 );
+              } else {
+                toast.error('Truyện chưa có chap nào , hệ thống sẽ cập nhật ngay khi có chap', { containerId: 'B' });
               }
             }}
             sx={{ flex: 1, fontSize: '18px', borderRadius: '8px' }}
