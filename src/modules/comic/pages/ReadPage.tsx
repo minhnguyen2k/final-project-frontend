@@ -20,6 +20,7 @@ const ReadPage: FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const comic = useSelector((state: AppState) => state.comicReader.comicInfo);
+  console.log(comic);
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
   const getAllChapImages = useCallback(async () => {
     setIsLoading(true);

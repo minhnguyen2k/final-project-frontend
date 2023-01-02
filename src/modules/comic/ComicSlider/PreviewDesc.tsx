@@ -42,9 +42,7 @@ const PreviewDesc: FC<Props> = ({ comic }) => {
                   },
                 }}
                 label={author.name}
-                component="a"
-                href="#basic-chip"
-                clickable
+                onClick={() => navigate(`/comic/author/${author.id}`)}
               />
             </SwiperSlide>
           ))}
@@ -68,7 +66,13 @@ const PreviewDesc: FC<Props> = ({ comic }) => {
           if (comic && comic.Chaps) {
             const comicChapList: IChapInfo[] = sortObj(comic.Chaps, 'chapName', true).reverse();
             dispatch(setComicInfoAction({ ...comic }));
-            navigate(generateReadComicLink(comic.name, comicChapList[0].chapName, comicChapList[0].id!));
+            navigate(
+              generateReadComicLink(
+                comic.name,
+                comicChapList[comicChapList.length - 1].chapName,
+                comicChapList[comicChapList.length - 1].id!,
+              ),
+            );
           }
         }}
         className={classes.readingButton}

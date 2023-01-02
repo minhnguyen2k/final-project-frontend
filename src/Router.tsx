@@ -13,6 +13,8 @@ import UserEdit from './modules/admin/comic/pages/UserEdit';
 import UserList from './modules/admin/comic/pages/UserList';
 import LoginPage from './modules/auth/pages/LoginPage';
 import SignUpPage from './modules/auth/pages/SignUpPage';
+import ComicAuthorListPage from './modules/comic/pages/ComicAuthorListPage';
+import ComicFavoritedPage from './modules/comic/pages/ComicFavoritedPage';
 import ComicFilteredPage from './modules/comic/pages/ComicFilteredPage';
 import ComicResultPage from './modules/comic/pages/ComicResultPage';
 import ReadPage from './modules/comic/pages/ReadPage';
@@ -44,6 +46,14 @@ const Router = (props: Props) => {
     {
       path: '/comic/filter',
       element: <ComicFilteredPage />,
+    },
+    {
+      path: '/comic/favorite',
+      element: <ComicFavoritedPage />,
+    },
+    {
+      path: '/comic/author/:authorId',
+      element: <ComicAuthorListPage />,
     },
     {
       path: '/comic/search',

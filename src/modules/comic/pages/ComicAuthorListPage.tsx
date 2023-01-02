@@ -4,50 +4,60 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IComicInfo } from '../../../models/comic';
 import { AppState } from '../../../redux/reducer';
 import { Action } from 'redux';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { fetchThunk } from '../common/redux/thunk';
 import { API_PATHS } from '../../../configs/api';
 import Loader from '../../../components/Loader';
 import ComicLayout from '../../../layout/ComicLayout';
 import { makeStyles } from '@mui/styles';
 import { Box, Typography } from '@mui/material';
-import ComicFilteredResult from '../ComicFiltered/components/ComicFilteredResult';
+import ComicCard from '../ComicList/ComicCard';
 
 interface Props {}
 
-const ComicResultPage: FC<Props> = () => {
+const ComicAuthorListPage: FC<Props> = () => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
-  const [comicListFiltered, setComicListFiltered] = useState<IComicInfo[]>([]);
-  const [searchParams] = useSearchParams();
+  const [comicList, setComicList] = useState<IComicInfo[]>([]);
+  const { authorId } = useParams();
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
-  const getComicsByFilter = useCallback(async () => {
+  const getAllBooksByAuthor = useCallback(async () => {
     setIsLoading(true);
-    const json = await dispatch(fetchThunk(`${API_PATHS.searchBook}?name=${searchParams.get('name')}`, 'get'));
+    const json = await dispatch(fetchThunk(`${API_PATHS.getAllBooksByAuthor}/${authorId}`, 'get'));
     if (json.success) {
       setIsLoading(false);
-      setComicListFiltered([...json.data]);
+      setComicList([...json.data]);
     }
-  }, [dispatch, searchParams]);
+  }, [authorId, dispatch]);
   useEffect(() => {
-    getComicsByFilter();
-  }, [getComicsByFilter]);
+    getAllBooksByAuthor();
+  }, [getAllBooksByAuthor]);
   return (
     <ComicLayout background="background.neutral" isReadScreen={false}>
       {isLoading && <Loader />}
       <div className={classes.root}>
-        <Box mt={1} className={classes.comicResultPageWrapper}>
-          <Typography mb={5} pl={5} variant="h3">{`${comicListFiltered.length} kết quả tìm kiếm cho "${searchParams.get(
-            'name',
-          )}"`}</Typography>
-          <ComicFilteredResult comicListFiltered={comicListFiltered} />
+        <Box mt={1} className={classes.comicBookAuthorListPageWrapper}>
+          {comicList.length > 0 && (
+            <Typography my={3} pl={5} variant="h3">{`Danh sách truyện được sáng tác bởi "${
+              comicList[0].Authors?.find((author) => author.id === authorId)?.name
+            }"`}</Typography>
+          )}
+          <Box display="flex" pl={5} mb={2} flexWrap="wrap" gap={4}>
+            {comicList.map((comic) => {
+              return (
+                <Box key={comic.id}>
+                  <ComicCard comic={comic} width="150px" height="200px" sortType="popular" />
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
       </div>
     </ComicLayout>
   );
 };
 
-export default ComicResultPage;
+export default ComicAuthorListPage;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
-  comicResultPageWrapper: {
+  comicBookAuthorListPageWrapper: {
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(2),
   },

@@ -25,7 +25,6 @@ const GenrePage: FC<Props> = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [genre, setGenre] = useState<IGenreInfo>();
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get('page'));
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();

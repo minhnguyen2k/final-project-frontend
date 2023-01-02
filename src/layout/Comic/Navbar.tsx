@@ -96,6 +96,13 @@ const Navbar = (props: Props) => {
                 Bộ lọc
               </Typography>
             </Link>
+            {currentUser && (
+              <Link to="/comic/favorite" style={{ textDecoration: 'none' }}>
+                <Typography fontSize="14px" color="textPrimary">
+                  Yêu thích
+                </Typography>
+              </Link>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

@@ -13,11 +13,15 @@ import { IGenreInfo } from '../../../../models/genre';
 import { IAuthorInfo } from '../../../../models/author';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 interface Props {
   comic: IComicInfo;
+  isFavorited: boolean;
+  handleCreateFavorite(): void;
+  handleDeleteFavorite(): void;
 }
 
-const ComicInfo: FC<Props> = ({ comic }) => {
+const ComicInfo: FC<Props> = ({ comic, isFavorited, handleCreateFavorite, handleDeleteFavorite }) => {
   const [isShowMore, setIsShowMore] = useState(true);
   const classes = useStyles();
   const { id } = useParams();
@@ -25,7 +29,6 @@ const ComicInfo: FC<Props> = ({ comic }) => {
   const chapTotal = useMemo(() => {
     return comic.Chaps?.length;
   }, [comic]);
-
   return (
     <div className={classes.comicInfoWrapper}>
       <img src={comic.image} alt={comic.name} className={classes.imageCard} />
@@ -45,9 +48,7 @@ const ComicInfo: FC<Props> = ({ comic }) => {
                 marginLeft: '10px',
               }}
               label={author.name}
-              component="a"
-              href="#basic-chip"
-              clickable
+              onClick={() => navigate(`/comic/author/${author.id}`)}
               key={author.id}
             />
           ))}
@@ -66,9 +67,7 @@ const ComicInfo: FC<Props> = ({ comic }) => {
                 marginLeft: '10px',
               }}
               label={genre.name}
-              component="a"
-              href="#basic-chip"
-              clickable
+              onClick={() => navigate(`/genres/${genre.id}`)}
               key={genre.id}
             />
           ))}
@@ -149,16 +148,24 @@ const ComicInfo: FC<Props> = ({ comic }) => {
             sx={{
               ml: 2,
               flex: 1,
-              fontSize: '18px',
-              bgcolor: '#ff9d11',
+              bgcolor: !isFavorited ? '#ff9d11' : '#d2d3d9',
               borderRadius: '8px',
               '&:hover': {
-                bgcolor: '#ffa726',
+                bgcolor: !isFavorited ? '#ff9d11' : '#d2d3d9',
               },
+              gap: 1,
             }}
+            onClick={isFavorited ? handleDeleteFavorite : handleCreateFavorite}
             variant="contained"
           >
-            <FavoriteBorderIcon /> &nbsp; Yêu thích
+            {!isFavorited ? (
+              <>
+                <FavoriteBorderIcon />
+                <Typography fontSize="18px">Yêu thích</Typography>
+              </>
+            ) : (
+              <Typography fontSize="18px">Đã yêu thích</Typography>
+            )}
           </Button>
         </Box>
       </div>

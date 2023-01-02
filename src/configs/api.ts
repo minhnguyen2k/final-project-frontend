@@ -12,7 +12,6 @@ function getBaseUrl(service: APIService) {
   } else if (service === APIService.protected) {
     return `${process.env.REACT_APP_API_URL}/api/protected`;
   } else if (service === APIService.public) {
-    console.log(process.env.REACT_APP_API_URL);
     return `${process.env.REACT_APP_API_URL}/api`;
   }
 
@@ -36,7 +35,7 @@ export const API_PATHS = {
   currentUser: `${getBaseUrl(APIService.public)}/users/current-user`,
   allAuthors: `${getBaseUrl(APIService.public)}/authors`,
   signCloudinary: `${getBaseUrl(APIService.auth)}/sign-cloudinary`,
-  uploadImage: 'https://api.cloudinary.com/v1_1/com-sys/image/upload',
+  uploadImage: 'https://api.cloudinary.com/v1_1/comic-syst/image/upload',
   createBook: `${getBaseUrl(APIService.public)}/books`,
   updateBook: `${getBaseUrl(APIService.public)}/books/edit`,
   deleteBook: `${getBaseUrl(APIService.public)}/books`,
@@ -55,4 +54,9 @@ export const API_PATHS = {
   deleteUser: `${getBaseUrl(APIService.public)}/users`,
   createComment: `${getBaseUrl(APIService.public)}/comments`,
   getAllCommentByBook: `${getBaseUrl(APIService.public)}/comments`,
+  createFavorite: `${getBaseUrl(APIService.public)}/favorites`,
+  checkCurrentBookFavorited: `${getBaseUrl(APIService.public)}/favorites/check-current-book`,
+  deleteFavorite: `${getBaseUrl(APIService.public)}/favorites`,
+  getAllFavoriteBooksByUser: `${getBaseUrl(APIService.public)}/favorites`,
+  getAllBooksByAuthor: `${getBaseUrl(APIService.public)}/books/all-book-author`,
 };

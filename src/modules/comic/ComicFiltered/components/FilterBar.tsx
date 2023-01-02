@@ -59,8 +59,8 @@ const FilterBar: FC<Props> = ({ genreList, getComicsByFilter }) => {
                 <MenuItem value={50}>{'>=50 Chapter'}</MenuItem>
                 <MenuItem value={100}>{'>=100 Chapter'}</MenuItem>
               </TextFieldFormik>
-              <Button variant="contained" className={classes.saveButton} type="submit">
-                SAVE
+              <Button variant="contained" type="submit">
+                Lọc Truyện
               </Button>
             </Box>
           </Form>
@@ -80,10 +80,5 @@ const useStyles = makeStyles((theme) => ({
   },
   textFieldWrapper: {
     width: '300px',
-  },
-
-  saveButton: {
-    backgroundColor: '#236FBC',
-    marginRight: 10,
   },
 }));
