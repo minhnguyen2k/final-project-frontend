@@ -50,6 +50,7 @@ const ComicList: FC<Props> = () => {
       toast.success('Delete successfully', { containerId: 'A' });
       if (selectedComic?.id === deletedComicId) {
         dispatch(setSelectedComicInfo(null));
+        dispatch(setSelectedComicChapInfo(null));
       }
       setIsDeleteDone(true);
       return;
