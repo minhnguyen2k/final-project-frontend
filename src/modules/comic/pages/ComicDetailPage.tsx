@@ -48,6 +48,21 @@ const ComicDetailPage: FC<Props> = () => {
     }
   }, [dispatch, id]);
 
+  const handleUpdateComicVoteCount = useCallback(async () => {
+    if (comic) {
+      const { id, ...data } = comic;
+      const json = await dispatch(
+        fetchThunk(`${API_PATHS.updateBook}/${comic.id}`, 'put', {
+          ...data,
+          voteCount: isFavorited ? data.voteCount - 1 : data.voteCount + 1,
+        }),
+      );
+      if (json.success) {
+        setComic({ ...comic, voteCount: json.data.voteCount });
+      }
+    }
+  }, [comic, dispatch, isFavorited]);
+
   const handleCreateFavorite = useCallback(async () => {
     if (!currentUser) {
       toast.info('Bạn cần đăng nhập để có thể thực hiện chức năng yêu thích', { containerId: 'B' });
@@ -56,19 +71,21 @@ const ComicDetailPage: FC<Props> = () => {
     const favoriteObj = { bookId: comic?.id };
     const json = await dispatch(fetchThunk(API_PATHS.createFavorite, 'post', favoriteObj));
     if (json.success) {
+      handleUpdateComicVoteCount();
       setIsFavorited(true);
       toast.success('Đã thêm truyện vào mục yêu thích', { containerId: 'A' });
     }
-  }, [comic?.id, dispatch]);
+  }, [comic?.id, dispatch, handleUpdateComicVoteCount]);
 
   const handleDeleteFavorite = useCallback(async () => {
     const favoriteObj = { bookId: comic?.id };
     const json = await dispatch(fetchThunk(API_PATHS.deleteFavorite, 'delete', favoriteObj));
     if (json.success) {
+      handleUpdateComicVoteCount();
       setIsFavorited(false);
       toast.success('Đã bỏ thích truyện', { containerId: 'A' });
     }
-  }, [comic?.id, dispatch]);
+  }, [comic?.id, dispatch, handleUpdateComicVoteCount]);
 
   useEffect(() => {
     setIsFavorited(false);
